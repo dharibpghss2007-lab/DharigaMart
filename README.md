@@ -257,4 +257,18 @@ Content-Type: application/json
 
 ---
 
+---
+
+## 9. Roadmap
+
+- [x] Authentication (register / login / JWT)
+- [x] Product catalog, search, filters & sort
+- [x] Shopping cart & checkout
+- [x] Order history & user profile
+- [ ] Payment gateway integration (UPI / card)
+- [ ] Admin dashboard for inventory & orders
+- [ ] Product recommendations
+- [ ] Email notifications & OTP login
+- [ ] Mobile-friendly PWA
+
 Happy shopping! **DHARIGA MART** 🛍️
