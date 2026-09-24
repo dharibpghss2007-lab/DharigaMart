@@ -1,0 +1,145 @@
+# ============================================================
+# DHARIGA MART - API tests (VS Code REST Client extension)
+# 1) Install "REST Client" (humao) in VS Code
+# 2) Click "Send Request" above each block
+# 3) Copy the token from the Login response into <TOKEN> below
+# ============================================================
+
+@base = http://localhost:8080
+@TOKEN = PASTE_JWT_TOKEN_HERE
+
+###
+# 1. Register a new user (public)
+POST {{base}}/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Priya Sharma",
+  "phone": "9876543210",
+  "email": "priya@example.com",
+  "password": "secret123",
+  "confirmPassword": "secret123"
+}
+
+###
+# 2. Login (public) -> returns { token, user, message }
+POST {{base}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "priya@example.com",
+  "password": "secret123"
+}
+
+###
+# 3. Get all products (public)
+GET {{base}}/api/products
+
+###
+# 4. Search products (public)
+GET {{base}}/api/products?search=lipstick
+
+###
+# 5. Filter by category (public)
+GET {{base}}/api/products?category=Makeup
+
+###
+# 6. Sort price low to high (public)
+GET {{base}}/api/products?sort=asc
+
+###
+# 7. Product details (public)
+GET {{base}}/api/products/14
+
+###
+# 8. All categories (public)
+GET {{base}}/api/categories
+
+###
+# 9. My profile (authenticated)
+GET {{base}}/api/users/me
+Authorization: Bearer {{TOKEN}}
+
+###
+# 10. Add item to cart (authenticated)
+POST {{base}}/api/cart
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{ "productId": 14, "quantity": 2 }
+
+###
+# 11. View cart (authenticated)
+GET {{base}}/api/cart
+Authorization: Bearer {{TOKEN}}
+
+###
+# 12. Update cart item quantity (authenticated)
+PUT {{base}}/api/cart/14
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{ "productId": 14, "quantity": 3 }
+
+###
+# 13. Remove cart item (authenticated)
+DELETE {{base}}/api/cart/14
+Authorization: Bearer {{TOKEN}}
+
+###
+# 14. Place order (authenticated) -> returns Order ID
+POST {{base}}/api/orders
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{
+  "customerName": "Priya Sharma",
+  "phone": "9876543210",
+  "email": "priya@example.com",
+  "address": "12, MG Road, Indiranagar",
+  "city": "Bengaluru",
+  "state": "Karnataka",
+  "pincode": "560001"
+}
+
+###
+# 15. My order history (authenticated)
+GET {{base}}/api/orders
+Authorization: Bearer {{TOKEN}}
+
+###
+# 16. Create a product (authenticated, admin CRUD demo)
+POST {{base}}/api/products
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{
+  "name": "Silk Ankle Socks",
+  "description": "Soft breathable socks.",
+  "category": "Accessories",
+  "price": 199.00,
+  "stock": 50,
+  "rating": 4.2,
+  "imageUrl": "/assets/images/products/handbag-bag.svg"
+}
+
+###
+# 17. Update a product (authenticated)
+PUT {{base}}/api/products/23
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{
+  "name": "Silk Ankle Socks (Pack of 3)",
+  "description": "Soft breathable socks, set of 3.",
+  "category": "Accessories",
+  "price": 449.00,
+  "stock": 40,
+  "rating": 4.4,
+  "imageUrl": "/assets/images/products/handbag-bag.svg"
+}
+
+###
+# 18. Delete a product (authenticated)
+DELETE {{base}}/api/products/23
+Authorization: Bearer {{TOKEN}}
