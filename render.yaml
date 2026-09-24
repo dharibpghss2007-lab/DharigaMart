@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: dhariga-mart
+    runtime: docker
+    repo: https://github.com/dharibpghss2007-lab/DharigaMart
+    plan: free
+    dockerContext: .
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:mysql://CHANGE_ME_HOST:CHANGE_ME_PORT/dhariga_mart?useSSL=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      - key: SPRING_DATASOURCE_USERNAME
+        value: avnadmin
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false
+      - key: APP_JWT_SECRET
+        sync: false
