@@ -7,3 +7,10 @@ target/
 .idea/
 *.log
 .DS_Store
+.idea/
+*.swp
+*.swo
+.ntvs_signature
+mvnw
+mvnw.cmd
+.mvn/
